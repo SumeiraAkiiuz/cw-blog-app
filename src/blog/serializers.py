@@ -1,16 +1,20 @@
 from rest_framework import serializers
-from .models import Post, Comment, Category, Like
+from .models import Post, Comment, Category, Like, PostView
 
-class CategorySerializer(serializers.ModelSerializer):
+class PostSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Category
+        model = Post
         fields = (
-            'id',
-            'name'
+            'title',
+            'content',
+            'image',
+            'category',
+            'status'
+            
         )
         
         
-class CategoryDetailSerializer(serializers.ModelSerializer):
+class PostDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
         fields = (
@@ -21,15 +25,3 @@ class CategoryDetailSerializer(serializers.ModelSerializer):
             'comments'
         )
         
-        
-class PostSerializer(serializers.ModelSerializer):
-    class Meta:
-        model =  Post
-        fields = (
-            'title',
-            'content',
-            'image',
-            'category',
-            'status',
-        )
- 
