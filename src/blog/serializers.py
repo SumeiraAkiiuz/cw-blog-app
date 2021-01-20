@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Post, Comment, Category, Like
+from .models import Post, Comment, Category, Like, PostView
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
@@ -32,4 +32,31 @@ class PostSerializer(serializers.ModelSerializer):
             'category',
             'status',
         )
+        
+        
+class CommentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Comment
+        fields = (
+            'user',
+            'post',
+            'time_stamp',
+            'content'
+        )
+        
+class LikeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Like
+        fields = (
+            'user',
+            'post'
+        )
  
+#  class PostViewSerializer(serializers.ModelSerializer):
+#      class Meta:
+#          model = PostView
+#          fields = (
+#              'user',
+#              'post',
+#              'time_stamp'
+#          )

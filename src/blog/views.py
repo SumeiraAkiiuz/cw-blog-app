@@ -28,4 +28,10 @@ class PostDetail(generics.ListAPIView):
         queryset = queryset.filter(post__title=title)
         return queryset
  
- 
+def post_list(request):
+    qs = Post.objects.all()
+    context = {
+        "object_list": qs
+    }
+    return render(request, "blog/post_list.html", context)
+
