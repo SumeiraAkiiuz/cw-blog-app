@@ -12,4 +12,3 @@ class PostList(generics.ListAPIView):
 class PostDetail(generics.ListAPIView):
     serializer_class = PostDetailSerializer
     queryset = Post.objects.all()
-    
