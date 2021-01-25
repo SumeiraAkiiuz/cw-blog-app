@@ -14,29 +14,26 @@ class PostSerializer(serializers.ModelSerializer):
             
         )
         
+class CommentCreateSrializer(serializers.ModelSerializer):
+    # content = serializers.CharField()
+    # user= serializers.PrimaryKeyRelatedField(source = 'user', queryset=User.objects.all(), write_only=True)
+    # post = serializers.PrimaryKeyRelatedField(source = 'post', queryset=Post.objects.all(), write_only=True)
+    
+    class Meta:
+        model = Comment
+        fields = (
+            "content",
+        )
         
 class PostDetailSerializer(serializers.ModelSerializer):
+    comments = CommentCreateSrializer(many=True)
     class Meta:
         model = Post
         fields = (
             'title',
             'comment_count',
             'view_count',
-            # 'like_count',
+            'like_count',
             'comments'
         )
         
-class CommentCreateSrializer(serializers.ModelSerializer):
-    content = serializers.CharField()
-    user= serializers.PrimaryKeyRelatedField(source = 'user', queryset=User.objects.all(), write_only=True)
-    post = serializers.PrimaryKeyRelatedField(source = 'post', queryset=Post.objects.all(), write_only=True)
-    
-    class Meta:
-        model = Comment
-        fields = (
-            "id",
-            "post",
-            "user",
-            "content",
-            "reply"
-        )
