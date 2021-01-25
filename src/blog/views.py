@@ -10,9 +10,10 @@ class PostList(generics.ListAPIView):
     queryset = Post.objects.all()
 
 
-class PostDetail(generics.ListAPIView):
+class PostDetail(generics.RetrieveAPIView):
     serializer_class = PostDetailSerializer
     queryset = Post.objects.all()
+    lookup_field = "slug"
 
 @api_view(['POST'])
 def comment_api(request, slug):
