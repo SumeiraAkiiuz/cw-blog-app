@@ -19,8 +19,7 @@ class Post(models.Model):
     )
     title = models.CharField(max_length=100)
     content = models.TextField()
-    image = models.ImageField(upload_to="user_directory_field", default='pic.png')
-    # image = models.CharField()
+    image = models.URLField(max_length=3000, blank=True)
     category = models.ForeignKey(Category, on_delete=models.PROTECT)
     publish_date = models.DateTimeField(auto_now_add=True)
     last_updated = models.DateTimeField(auto_now=True)
@@ -31,15 +30,16 @@ class Post(models.Model):
     def __str__(self):
         return self.title
     
+    @property
     def comment_count(self):
         return self.comment_set.all().count()
-
+    @property
     def view_count(self):
         return self.postview_set.all().count()
-  
+    @property
     def like_count(self):
         return self.like_set.all().count()
-
+    @property
     def comments(self):
         return self.comment_set.all()
     
@@ -53,7 +53,6 @@ class Comment(models.Model):
         return self.user.username
         
 class Like(models.Model):
-    # likeuser = models.ManyToManyField(User)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     
