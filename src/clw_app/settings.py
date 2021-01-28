@@ -39,7 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'blog.apps.BlogConfig'
+    'blog.apps.BlogConfig',
+    'dj_rest_auth'
+    
     
 ]
 
@@ -103,6 +105,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# REST_FRAMEWORK = {
+#     'DEFAULT_PEGINATION_CLASS': 'rest_framework.pegination.PageNumberPagination',
+#     'PAGE_SIZE': 1
+# }
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
