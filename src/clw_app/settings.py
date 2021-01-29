@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'blog.apps.BlogConfig',
+    'users.apps.UsersConfig'
     'dj_rest_auth'
     
     
