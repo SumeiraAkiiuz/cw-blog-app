@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'nested_admin',
+    'rest_framework.authtoken',
     'blog.apps.BlogConfig',
     'users.apps.UsersConfig',
     'dj_rest_auth',
@@ -106,10 +108,16 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# REST_FRAMEWORK = {
-#     'DEFAULT_PEGINATION_CLASS': 'rest_framework.pegination.PageNumberPagination',
-#     'PAGE_SIZE': 1
-# }
+REST_FRAMEWORK = {
+    # 'DEFAULT_PEGINATION_CLASS': 'rest_framework.pegination.PageNumberPagination',
+    # 'PAGE_SIZE': 1,
+    
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        # 'rest_framework.authentication.BasicAuthentication',
+        # 'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+    ]
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
