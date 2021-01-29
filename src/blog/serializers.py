@@ -5,17 +5,17 @@ from django.contrib.auth.models import User
 from .models import Post, Comment, Category, Like, PostView
 from django.db.models import Q
 
-class PostSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Post
-        fields = (
-            'title',
-            'content',
-            'image',
-            'category',
-            'status'
+# class PostSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Post
+#         fields = (
+#             'title',
+#             'content',
+#             'image',
+#             'category',
+#             'status'
             
-        )
+#         )
         
 class CommentSerializer(serializers.ModelSerializer):
     user = serializers.StringRelatedField()
