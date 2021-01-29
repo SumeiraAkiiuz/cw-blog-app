@@ -41,9 +41,10 @@ INSTALLED_APPS = [
     'rest_framework',
     'nested_admin',
     'rest_framework.authtoken',
+    'dj_rest_auth',
     'blog.apps.BlogConfig',
     'users.apps.UsersConfig',
-    'dj_rest_auth',
+   
     
     
 ]
