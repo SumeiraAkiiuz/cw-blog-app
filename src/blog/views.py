@@ -4,7 +4,7 @@ from rest_framework import generics
 from rest_framework.decorators import api_view
 from django.http import JsonResponse
 from .models import Category, Post, Like, PostView
-from .serializers import PostSerializer, PostDetailSerializer, CommentCreateSrializer, PostUpdateSerializer, PostListSerializer, CommentSerializer
+from .serializers import PostDetailSerializer, CommentCreateSrializer, PostUpdateSerializer, PostListSerializer, CommentSerializer
 from .paginations import MyPagination
 from rest_framework.views import APIView
 from rest_framework import status
@@ -14,7 +14,7 @@ from .paginations import MyPagination
 from .serializers import serializers
 
 class PostList(generics.ListAPIView):
-    serializer_class = PostSerializer
+    serializer_class = PostListSerializer
     pagination_class = MyPagination
     queryset = Post.objects.all()
 
@@ -27,15 +27,17 @@ class userPostList(generics.ListAPIView):
         queryset = Post.objects.filter(author=self.request.user)
         return queryset
     
+    
 class PostCreateApi(generics.CreateAPIView):
     permission_classes = ['IsAuthenticated']
-    serializer_class = PostUpdateSerializer
     queryset = Post.objects.all()
+    serializer_class = PostUpdateSerializer
     
     
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
-    
+
+
 class PostDetail(generics.RetrieveAPIView):
     permission_classes = [IsAuthenticated]
     serializer_class = PostDetailSerializer
@@ -46,7 +48,7 @@ class PostDetail(generics.RetrieveAPIView):
         obj = super().get_object()
         PostView.objects.get_or_create(user=self.request.user, post=obj)
         return obj
-    
+
     
 class PostUpdate(generics.RetrieveAPIView):
     permission_classes = [IsAuthenticated, IsKeeper]
@@ -54,11 +56,14 @@ class PostUpdate(generics.RetrieveAPIView):
     serializer_class = PostUpdateSerializer
     lookup_field = "slug"
 
+
 class PostDelete(generics.DestroyAPIView):
     permission_classes = [IsAuthenticated, IsKeeper]
     queryset = Post.objects.all()
     serializer_class = PostDetailSerializer
     lookup_field = "slug"
+
+
     
 class CreateCommentAPI(APIView):
     permission_classes = [IsAuthenticated]
@@ -72,6 +77,8 @@ class CreateCommentAPI(APIView):
             return Response(serializer.data, status=200)
         else:
             return Response({"errors": serializer.errors}, status=400)
+
+
         
 class CreateLikeAPI(APIView):
     permission_classes = [IsAuthenticated]
@@ -88,6 +95,8 @@ class CreateLikeAPI(APIView):
             "messages": "like"
         }
         return Response(data)
+
+
     
     
 # @api_view(['POST'])
