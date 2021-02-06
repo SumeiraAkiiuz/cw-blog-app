@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'nested_admin',
     'rest_framework.authtoken',
     'dj_rest_auth',
+    'corsheaders',
     'blog.apps.BlogConfig',
     'users.apps.UsersConfig',
    
@@ -52,6 +53,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -142,3 +144,4 @@ MEDIA_URL ='/media/'
 
 MEDIA_ROOT = BASE_DIR / "media_root"
 
+CORS_ALLOW_ALL_ORIGINS = True
