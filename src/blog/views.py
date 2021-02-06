@@ -14,6 +14,8 @@ from .paginations import MyPagination
 from .serializers import serializers
 
 class PostList(generics.ListAPIView):
+    
+    permission_classes = [IsAuthenticated]
     serializer_class = PostListSerializer
     pagination_class = MyPagination
     queryset = Post.objects.all()
@@ -29,7 +31,7 @@ class userPostList(generics.ListAPIView):
     
     
 class PostCreateApi(generics.CreateAPIView):
-    permission_classes = ['IsAuthenticated']
+    permission_classes = [IsAuthenticated]
     queryset = Post.objects.all()
     serializer_class = PostUpdateSerializer
     
